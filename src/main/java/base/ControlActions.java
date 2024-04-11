@@ -16,6 +16,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,15 +33,35 @@ public abstract class ControlActions {
 	private static WebDriverWait wait;
 
 	static public void LaunchBrowser() {
+		
+		String browser = System.getProperty("browserName")==null?"chrome":System.getProperty("browserName");
+		switch(browser){
+		
+		
+		case "chrome":
+			ChromeOptions options = new ChromeOptions();
+			WebDriverManager.chromedriver().setup();
+			prop = new PropOperation(ConstantFilePath.ENV_FILEPATH);
+			driver = new ChromeDriver(options);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(ConstantFilePath.WAIT));
+			driver.get(prop.getValue("url"));
+			driver.manage().window().maximize();
+			break;
+		
+		case "edge":
+			EdgeOptions edgeOptions = new EdgeOptions();
+			WebDriverManager.edgedriver().setup();
+			prop = new PropOperation(ConstantFilePath.ENV_FILEPATH);
+			driver = new EdgeDriver(edgeOptions);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(ConstantFilePath.WAIT));
+			driver.get(prop.getValue("url"));
+			driver.manage().window().maximize();
+			break;
+		
+		}
+		
 
-		ChromeOptions options = new ChromeOptions();
-		WebDriverManager.chromedriver().setup();
-		prop = new PropOperation(ConstantFilePath.ENV_FILEPATH);
-		driver = new ChromeDriver(options);
-		wait = new WebDriverWait(driver, Duration.ofSeconds(ConstantFilePath.WAIT));
-		driver.get(prop.getValue("url"));
-		driver.manage().window().maximize();
-	}
+			}
 
 	protected WebElement getElement(String locatorType, String locatorValue, boolean isWaitRequired) {
 		WebElement e = null;
