@@ -64,7 +64,10 @@ public class CartPage extends ControlActions {
 	}
 
 	public int getProductCountOnCartMenu() {
-		return Integer.parseInt(getElementText(myCartProductCount, true));
+		String text = getElementText(myCartProductCount, true);
+		System.out.println("Count text : " + text);
+		return Integer.parseInt(text);
+		
 	}
 
 	public List<String> getProductDetailsOnCartMenu(String productName) {
