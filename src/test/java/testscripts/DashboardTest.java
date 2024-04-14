@@ -7,12 +7,22 @@ import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pages.DashboardPage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 
+@Epic("Dashboard Page Feature")
 public class DashboardTest extends TestBase {
 
 
 	@Test
+	@Description("This test attempts to verify items list of side filter.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Husain")
+	@Story("Dashboard Page")
 	public void verifyItemListOfSideFilter() {
 		login();
 		List<String> expectedCategoryOptions = new ArrayList<String>(Arrays.asList("fashion", "electronics", "household"));
@@ -40,6 +50,10 @@ public class DashboardTest extends TestBase {
 	}
 	
 	@Test
+	@Description("This test attempts to verify filters on dashboard page.")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Munira")
+	@Story("Dashboard Page")
 	public void verifyFilterTest() throws InterruptedException {
 		login();
 		
