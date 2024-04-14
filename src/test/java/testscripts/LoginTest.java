@@ -3,21 +3,26 @@ package testscripts;
 import java.io.IOException;
 
 import org.testng.Assert;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import base.ControlActions;
 import constants.ConstantFilePath;
-import pages.LoginPage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import utilities.ExcelOperations;
 
+@Epic("Login Page Feature")
 public class LoginTest extends TestBase {
 
 	@Test
+	@Description("This test attempts to verify Login functionality.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Munira")
+	@Story("Login Page")
 	public void verifyLogin() {
 		// TODO Auto-generated method stub
 
@@ -27,6 +32,10 @@ public class LoginTest extends TestBase {
 	}
 
 	@Test
+	@Description("This test attempts to verify login error message functionality.")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Husain")
+	@Story("Login Page")
 	public void veriryLoginErrorMessages() {
 		System.out.println("Step - Click on Login button");
 		loginPage.loginButtonClick();
@@ -40,6 +49,10 @@ public class LoginTest extends TestBase {
 	}
 
 	@Test
+	@Description("This test attempts to verify password error message functionality.")
+    @Severity(SeverityLevel.MINOR)
+    @Owner("Huzefa")
+	@Story("Login Page")
 	public void veriryPasswordErrorMessage() {
 		System.out.println("Step - Enter Email address");
 		loginPage.enterUserEmail("hbolty@gmail.com");
@@ -55,6 +68,10 @@ public class LoginTest extends TestBase {
 	}
 
 	@Test
+	@Description("This test attempts to verify email error message functionality.")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Huzefa")
+	@Story("Login Page")
 	public void veriryEmailErrorMessage() {
 		System.out.println("Step - Enter Password");
 		loginPage.enterPassword("Pass=1234");
@@ -70,6 +87,10 @@ public class LoginTest extends TestBase {
 	}
 
 	@Test(dataProvider = "loginData")
+	@Description("This test attempts to verify multiple user login functionality.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Hakim")
+	@Story("Login Page")
 	public void verifyMultiUserLogin(String uName, String password, String loginStatus) {
 		System.out.println("Step - Enter login credentials");
 		loginPage.login(uName, password);

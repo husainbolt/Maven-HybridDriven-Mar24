@@ -5,9 +5,9 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import base.ControlActions;
+import io.qameta.allure.Step;
 
 public class DashboardPage extends ControlActions {
 
@@ -43,6 +43,11 @@ public class DashboardPage extends ControlActions {
 
 	public int getTotalItemsInlistOfCategories() {
 		return listOfCategories.size();
+	}
+	
+	@Step("Verifying product added to Cart")
+	public boolean isAddedToCartMessageDisplayed() {
+		return isElementDisplayedWithWait(productAddedtoCartToastMessage);
 	}
 
 	public List<String> getTextOfItemsInlistOfCategories() {
@@ -88,6 +93,7 @@ public class DashboardPage extends ControlActions {
 		return isElementSelected("XPATH", locatorValue, false);
 	}
 	
+	@Step("Add product {0} to the cart.")
 	public void addToCart(String productName) {
 		productName = productName.toLowerCase();
 		String locator = String.format("//b[text()='%s']/ancestor::div/button[contains(text(),'Add To Cart')]", productName.toUpperCase());
@@ -104,6 +110,7 @@ public class DashboardPage extends ControlActions {
 		waitForElementToBeInvisible(productAddedtoCartToastMessage);
 	}
 	
+	@Step("Click on Cart")
 	public CartPage clickOnCart() {
 		clickOnElement(cartButton, true);
 		return new CartPage();

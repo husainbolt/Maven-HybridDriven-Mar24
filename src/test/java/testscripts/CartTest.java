@@ -3,16 +3,28 @@ package testscripts;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import pages.CartPage;
 
+@Epic("Cart Page Feature")
 public class CartTest extends TestBase {
 
 	@Test
+	@Description("This test attempts to verify add to cart functionality.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Husain")
+	@Story("Cart Page")
 	public void verifyAddToCartFunctionality() {
 		login();
 		String productName = "ADIDAS ORIGINAL";
 		System.out.println("Step - Click on Add to Cart for " + productName + " product to add it in Cart List");
 		dashboardPage.addToCart(productName);
+		dashboardPage.isAddedToCartMessageDisplayed();
 		dashboardPage.waitForSpinnerToDisappear();
 		// dashboardPage.waitForProductToastMessageToDisappear();
 
@@ -36,10 +48,15 @@ public class CartTest extends TestBase {
 	}
 	
 	@Test
+	@Description("This test attempts to verify multiple products added to cart functionality.")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Husain")
+	@Story("Cart Page")
 	public void verifyMultipleProductsAddToCartFunctionality() {
 		login();
 		String productName1 = "ADIDAS ORIGINAL";
 		String productName2 = "ZARA COAT 3";
+		Assert.fail("Error thrown purposely");
 		System.out.println("Step - Click on Add to Cart");
 		dashboardPage.addToCart(productName1);
 		dashboardPage.waitForSpinnerToDisappear();
@@ -72,6 +89,10 @@ public class CartTest extends TestBase {
 	}
 	
 	@Test
+	@Description("This test attempts to verify cart list after logout.")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Munira")
+	@Story("Cart Page")
 	void verifyCartListAfterLogout() {
 		
 		login();

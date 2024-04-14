@@ -18,12 +18,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import constants.ConstantFilePath;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
 import utilities.PropOperation;
 
 public abstract class ControlActions {
@@ -166,7 +166,8 @@ public abstract class ControlActions {
 	protected String getCurrenPagetURL() {
 		return driver.getCurrentUrl();
 	}
-
+	
+	
 	public static void takesScreenshot(String fileName) {
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		File srcFile = ts.getScreenshotAs(OutputType.FILE);
@@ -176,6 +177,14 @@ public abstract class ControlActions {
 			e.printStackTrace();
 		}
 	}
+	
+	@Attachment(type = "image/png", value = "Screenshot of Failed TC {0}")
+	public static byte[] takesScreenshotwithAllure(String fileName) {
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		return ts.getScreenshotAs(OutputType.BYTES);
+		
+	}
+
 
 	protected List<String> getElementTextList(List<WebElement> elementList) {
 		List<String> elementTextList = new ArrayList<String>();
